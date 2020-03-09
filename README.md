@@ -5,6 +5,8 @@ This script takes out some of the hassle when installing DKAN2.
 To run the script do:
 
 ```
+sudo chmod 777 dkan2-installation
+
 sudo ./dkan2-installation {username}
 ```
 
