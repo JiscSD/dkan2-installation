@@ -2,6 +2,18 @@
 
 This script takes out some of the hassle when installing DKAN2.
 
+To run the script do:
+
+```
+sudo ./dkan2-installation {username}
+```
+
+e.g
+
+```
+sudo ./dkan2-installation nathan
+```
+
 It performs the following functions:
 - installs Docker and Docker Composer
 - installs dktl
