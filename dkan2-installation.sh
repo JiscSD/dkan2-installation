@@ -10,7 +10,7 @@ apt-get update
 echo -e "\e[34m----------"
 echo "DKAN2 Installation: installing prerequisite packages"
 echo -e "----------\e[39m"
-apt install apt-transport-https ca-certificates curl software-properties-common
+apt install apt-transport-https ca-certificates curl software-properties-common -y
 
 # install nvm
 echo -e "\e[34m----------"
@@ -44,7 +44,7 @@ apt-get update
 echo -e "\e[34m----------"
 echo "DKAN2 Installation: installing docker-ce"
 echo -e "----------\e[39m"
-apt install docker-ce
+apt install docker-ce -y
 
 usermod -aG docker $1
 
@@ -75,19 +75,14 @@ echo -e "----------\e[39m"
 git clone https://github.com/GetDKAN/dkan-tools.git /home/$1/dkan-tools
 
 echo -e "\e[34m----------"
-echo "DKAN2 Installation: delte /usr/local/bin/dktl if exists"
+echo "DKAN2 Installation: delete /usr/local/bin/dktl if exists"
 echo -e "----------\e[39m"
 # delete symbolic link if it exists
 rm -Rf /usr/local/bin/dktl; 
 
-echo "$(ls /usr/local/bin)"
-
 echo -e "\e[34m----------"
 echo "DKAN2 Installation: symbolic link between dktl and /usr/local/bin/dktl"
 echo -e "----------\e[39m"
-
-echo /home/$1/dkan-tools/bin/dktl
-echo "$(ls /home/$1/dkan-tools/bin/dktl)"
 ln -s /home/$1/dkan-tools/bin/dktl /usr/local/bin/dktl
 
 # make /var/www if not already there
@@ -95,14 +90,32 @@ mkdir -p /var/www
 
 cd /var/www
 
+echo -e "\e[34m----------"
+echo "DKAN2 Installation: run nginx container"
+echo -e "----------\e[39m"
+
 docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
 
-dktl init
+echo -e "\e[34m----------"
+echo "DKAN2 Installation: dktl init"
+echo -e "----------\e[39m"
+/usr/local/bin/dktl init
 
-dktl get 8.7.3
+/usr/local/bin/dktl get 8.7.3
 
-dktl make --frontend
+/usr/local/bin/dktl make --frontend
 
-dktl updatedrush
+echo -e "\e[34m----------"
+echo "DKAN2 Installation: dktl updaterush"
+echo -e "----------\e[39m"
+/usr/local/bin/dktl updatedrush
 
-dktl install > /home/$1/druapl-creds.txt
+echo -e "\e[34m----------"
+echo "DKAN2 Installation: dktl install"
+echo -e "----------\e[39m"
+/usr/local/bin/dktl install
+
+echo -e "\e[34m----------"
+echo "DKAN2 Installation: drush uli --uri=dkan"
+echo -e "----------\e[39m"
+/usr/local/bin/dktl drush uli --uri=dkan
