@@ -5,15 +5,15 @@ This script takes out some of the hassle when installing DKAN2.
 To run the script do:
 
 ```
-sudo chmod 777 dkan2-installation
+sudo chmod 777 dkan2-installation.sh
 
-sudo ./dkan2-installation {username}
+sudo ./dkan2-installation.sh {username}
 ```
 
 e.g
 
 ```
-sudo ./dkan2-installation nathan
+sudo ./dkan2-installation.sh nathan
 ```
 
 It performs the following functions:
