@@ -118,4 +118,4 @@ echo -e "----------\e[39m"
 echo -e "\e[34m----------"
 echo "DKAN2 Installation: drush uli --uri=dkan"
 echo -e "----------\e[39m"
-/usr/local/bin/dktl drush uli --uri=dkan
+/usr/local/bin/dktl drush uli --uri=dkan > /home/$1/dkan-install.txt
