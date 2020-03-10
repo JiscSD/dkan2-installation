@@ -12,6 +12,9 @@ echo "DKAN2 Installation: installing prerequisite packages"
 echo -e "----------\e[39m"
 apt install apt-transport-https ca-certificates curl software-properties-common -y
 
+# if nvm installed, remove
+rm -Rf /home/$1 .nvm
+
 # install nvm
 echo -e "\e[34m----------"
 echo "DKAN2 Installation: install NVM"
